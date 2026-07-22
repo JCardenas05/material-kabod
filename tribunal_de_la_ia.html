@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Tribunal de la IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14131a;
+    --ink-2:#1d1c26;
+    --paper:#f3e9d2;
+    --paper-2:#ece0c2;
+    --paper-line:#d8c79f;
+    --red:#a8241d;
+    --red-dark:#7c1a15;
+    --green:#20623f;
+    --green-dark:#154a2f;
+    --gold:#c69a3a;
+    --text:#241f14;
+    --muted:#6b6350;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 20% 10%, #22212c 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, #1a1926 0%, transparent 55%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px),
+      var(--ink);
+    font-family:'Source Sans 3', sans-serif;
+    color:var(--text);
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  header{
+    text-align:center;
+    margin-bottom:8px;
+    color:#efe6cf;
+  }
+  .badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:3px;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:4px 12px;
+    border-radius:2px;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Special Elite', monospace;
+    font-size:clamp(28px, 5vw, 46px);
+    margin:0 0 10px;
+    letter-spacing:1px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+  }
+  header p.sub{
+    max-width:640px;
+    margin:0 auto 6px;
+    color:#c9c0a4;
+    font-size:15px;
+    line-height:1.55;
+  }
+  .scorebar{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--gold);
+    margin-top:18px;
+    letter-spacing:1px;
+  }
+
+  .cases{
+    margin-top:42px;
+    display:flex;
+    flex-direction:column;
+    gap:46px;
+  }
+
+  .case{
+    position:relative;
+    background:
+      linear-gradient(var(--paper), var(--paper)),
+      repeating-linear-gradient(180deg, transparent 0 27px, rgba(0,0,0,0.03) 27px 28px);
+    background-blend-mode:normal;
+    border:1px solid var(--paper-line);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.45), 0 2px 0 rgba(255,255,255,0.4) inset;
+    padding:30px 30px 26px;
+    transform:rotate(var(--tilt, -0.6deg));
+  }
+  .case:nth-child(even){ --tilt: 0.7deg; }
+
+  .pin{
+    position:absolute;
+    top:-14px; left:50%;
+    transform:translateX(-50%);
+    width:22px;height:22px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #e8544a, var(--red-dark));
+    box-shadow:0 3px 6px rgba(0,0,0,0.5);
+  }
+
+  .case-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:2px solid var(--text);
+    padding-bottom:10px;
+    margin-bottom:16px;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .case-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:2px;
+    color:var(--muted);
+  }
+  .case-num b{color:var(--text);}
+  .classified{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:2px;
+    background:var(--text);
+    color:var(--paper);
+    padding:3px 9px;
+  }
+  .case h2{
+    font-family:'Special Elite', monospace;
+    font-size:23px;
+    margin:2px 0 0;
+    line-height:1.25;
+  }
+
+  .case p{
+    font-size:15.5px;
+    line-height:1.68;
+    margin:0 0 14px;
+  }
+  .case p:last-of-type{margin-bottom:0;}
+  .redact{
+    background:var(--text);
+    color:var(--text);
+    padding:0 4px;
+    border-radius:2px;
+    user-select:none;
+  }
+
+  .controls{
+    margin-top:22px;
+    padding-top:16px;
+    border-top:1px dashed var(--paper-line);
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+  }
+  .vote-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:1px;
+    width:100%;
+    margin-bottom:2px;
+  }
+  button{
+    font-family:'Source Sans 3', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    border:2px solid var(--text);
+    background:transparent;
+    color:var(--text);
+    padding:9px 16px;
+    cursor:pointer;
+    border-radius:2px;
+    transition:transform .12s ease, background .15s ease, color .15s ease;
+  }
+  button:hover{ transform:translateY(-2px); }
+  button.vote.selected-true{ background:var(--green); border-color:var(--green-dark); color:#fff; }
+  button.vote.selected-false{ background:var(--red); border-color:var(--red-dark); color:#fff; }
+  button.reveal{
+    background:var(--text);
+    color:var(--paper);
+    margin-left:auto;
+  }
+  button.reveal:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    transform:none;
+  }
+  button:disabled:hover{transform:none;}
+
+  .verdict-area{
+    margin-top:18px;
+    display:none;
+  }
+  .verdict-area.show{ display:block; animation:fadein .25s ease; }
+  @keyframes fadein{ from{opacity:0} to{opacity:1} }
+
+  .stamp{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:26px;
+    letter-spacing:2px;
+    padding:8px 22px;
+    border:5px double;
+    border-radius:6px;
+    transform:rotate(-7deg) scale(0.4);
+    opacity:0;
+    animation:stampIn .4s cubic-bezier(.2,1.5,.4,1) forwards;
+  }
+  .stamp.verdad{ color:var(--green-dark); border-color:var(--green-dark); }
+  .stamp.mentira{ color:var(--red-dark); border-color:var(--red-dark); }
+  @keyframes stampIn{
+    0%{ transform:rotate(-7deg) scale(2.8); opacity:0; }
+    60%{ transform:rotate(-7deg) scale(0.92); opacity:1; }
+    100%{ transform:rotate(-7deg) scale(1); opacity:1; }
+  }
+
+  .feedback{
+    margin-top:12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+  }
+  .feedback.ok{ color:var(--green-dark); }
+  .feedback.no{ color:var(--red-dark); }
+
+  .explain{
+    margin-top:14px;
+    background:var(--paper-2);
+    border-left:4px solid var(--gold);
+    padding:14px 16px;
+    font-size:14.5px;
+    line-height:1.6;
+  }
+  .explain b{ display:block; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:1.5px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; }
+
+  footer{
+    max-width:920px;
+    margin:50px auto 0;
+    text-align:center;
+    color:#8b8368;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:1px;
+  }
+
+  @media (max-width:560px){
+    .case{ padding:22px 18px 20px; transform:rotate(0deg); }
+    .case:nth-child(even){ transform:rotate(0deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge">EXPEDIENTES CLASIFICADOS</div>
+    <h1>EL TRIBUNAL DE LA IA</h1>
+    <p class="sub">8 casos. En cada uno, alguien (o algo) habla con total seguridad. Tu misión: decidir si dice la VERDAD o si te está mintiendo con estilo. Vota antes de revelar el veredicto — así descubres si el tono seguro te convenció aunque no debía.</p>
+    <div class="scorebar" id="scorebar">ACIERTOS: 0 / 0 casos resueltos</div>
+  </header>
+
+  <div class="cases" id="cases"></div>
+
+  <footer>— FIN DEL EXPEDIENTE — RECUERDA: SONAR SEGURO NO ES LO MISMO QUE TENER LA RAZÓN —</footer>
+</div>
+
+<script>
+const CASES = [
+  {
+    verdict:false,
+    title:"El semáforo fucsia púrpura",
+    paragraphs:[
+      "Hablemos de algo que ves todos los días en la calle y que la psicología moderna descubrió por puro accidente: el color de las luces de los semáforos. Si le preguntas a cualquier persona de qué color es la luz superior de un semáforo, te dirá sin dudarlo: «Roja».",
+      "Aquí viene el truco mental más fascinante de la infraestructura urbana: la luz de arriba de los semáforos no es roja, es fucsia purpúreo. Parece una locura porque tú «ves» rojo. Pero no es tu ojo el que mide el color, es tu cerebro traduciéndolo. En los años 60, cuando se masificaron los semáforos en las ciudades, descubrieron un problema gravísimo: la luz roja pura en bombillos incandescentes generaba demasiada fatiga visual en los conductores nocturnos y, peor aún, causaba un fenómeno llamado <em>ceguera perceptiva puntual</em> (los conductores encandilados dejaban de ver la luz tras varios segundos mirándola fijamente)."
+    ],
+    explain:"Truco usado: inventar un término técnico con apariencia científica (\"ceguera perceptiva puntual\" no existe), atribuir el descubrimiento a una década concreta (\"los años 60\") y apelar a la palabra \"psicología\" como si fuera un estudio real. El semáforo sí es rojo — un rojo intencionalmente saturado para ser visible incluso para personas con daltonismo."
+  },
+  {
+    verdict:false,
+    title:"El cerebro dormido al 90%",
+    paragraphs:[
+      "Este es uno de esos datos que todo profesor, entrenador o coach motivacional repite con seguridad absoluta: los seres humanos solo usamos el 10% de la capacidad de nuestro cerebro. El otro 90% permanece «apagado», como una casa enorme donde solo se usa un cuarto.",
+      "El origen es más curioso de lo que parece: durante la Segunda Guerra Mundial, un grupo de propagandistas necesitaba convencer a la población de que el esfuerzo humano tenía un límite oculto por descubrir, y citaron mal una investigación de 1907 sobre neuronas «inactivas» en tejido post-mortem. El error se repitió tantas veces en revistas de superación personal que hoy hasta algunos documentales lo dan por hecho — incluso se le atribuye (falsamente) la frase a Albert Einstein."
+    ],
+    explain:"Es uno de los mitos más famosos del mundo y ha sido desmentido muchas veces por la neurociencia: los estudios de actividad cerebral (resonancia magnética funcional) muestran que, a lo largo del día, usamos prácticamente el 100% del cerebro, aunque no todo al mismo tiempo. El truco: mezclar una fecha real (1907), una guerra real y una cita falsa atribuida a un científico famoso para sonar verificable."
+  },
+  {
+    verdict:true,
+    title:"El pulpo con tres corazones y sangre azul",
+    paragraphs:[
+      "Este caso suena tan absurdo que la mayoría de la gente jura que es mentira apenas lo escucha: el pulpo tiene tres corazones y su sangre es azul, no roja.",
+      "Dos de esos corazones se dedican exclusivamente a bombear sangre hacia las branquias para oxigenarla, mientras que el tercero se encarga de mandar esa sangre ya oxigenada al resto del cuerpo. Y sobre el color: en lugar de hemoglobina (la molécula con hierro que hace roja nuestra sangre), los pulpos usan hemocianina, una molécula basada en cobre, y por eso su sangre es azul cuando tiene contacto con el oxígeno."
+    ],
+    explain:"Es totalmente real. De hecho, cuando un pulpo nada activamente, el corazón principal se cansa y por eso prefieren desplazarse arrastrándose por el fondo marino en vez de nadar — nadar los agota más rápido. La ciencia real, a veces, es más rara que cualquier mentira que inventemos."
+  },
+  {
+    verdict:false,
+    title:"Las 8 arañas que te tragas al año",
+    paragraphs:[
+      "Cuando duermes, con la boca ligeramente abierta y sin ningún movimiento que las asuste, en promedio te tragas entre 4 y 8 arañas por año. Suena repugnante, pero tiene una explicación de comportamiento animal bastante lógica: las arañas buscan lugares tibios, húmedos y con vibraciones rítmicas (como la respiración de una persona dormida) porque las confunden con el ambiente ideal para cazar insectos pequeños.",
+      "Lo más curioso de este dato es su propio origen: en 1993, una periodista llamada Lisa Holst escribió a propósito una lista de datos falsos —incluyendo este— para demostrar en un artículo qué tan rápido la gente reenvía «hechos» sin verificarlos. El plan le salió tan bien que el dato falso se hizo más famoso que el artículo que lo desmentía."
+    ],
+    explain:"Es falso, y la parte de la periodista de 1993 es real: ese \"mito sobre el mito\" existe de verdad y es la mejor prueba de que una mentira bien contada puede volverse \"de dominio público\". En realidad, las arañas evitan a los humanos: sienten nuestra respiración y el dióxido de carbono que exhalamos como una amenaza, no como una invitación."
+  },
+  {
+    verdict:true,
+    title:"El rayo más caliente que el sol",
+    paragraphs:[
+      "Aquí va un dato que parece publicidad exagerada de una película de superhéroes: un rayo común, de los que caen durante una tormenta, alcanza temperaturas más altas que la superficie del sol.",
+      "El canal de un rayo puede llegar a unos 30,000 °C en un instante — eso es alrededor de cinco veces más caliente que los cerca de 5,500 °C que tiene la superficie visible del sol. La razón es que un rayo comprime una descarga eléctrica gigantesca en un canal de aire increíblemente delgado durante microsegundos, generando ese calor extremo aunque dure muchísimo menos tiempo que el sol brillando."
+    ],
+    explain:"Totalmente cierto — y verificable en cualquier fuente seria de física atmosférica. Es un buen ejemplo de un dato real que suena a exageración de IA precisamente porque compara dos cosas de escalas gigantescas (un rayo de tormenta contra una estrella) sin dar contexto de que se trata de temperatura instantánea, no de energía total liberada."
+  },
+  {
+    verdict:false,
+    title:"El micro:bit, un proyecto de la NASA",
+    paragraphs:[
+      "Este dato les puede interesar especialmente a ustedes que ya han programado con micro:bit: la placa fue creada originalmente por la NASA como una herramienta de entrenamiento psicomotor para futuros astronautas adolescentes, antes de que un acuerdo de licenciamiento permitiera llevarla a las aulas de todo el mundo.",
+      "La idea original —según el expediente técnico filtrado en 2015— era que los aspirantes a un futuro programa espacial juvenil practicaran secuencias de comandos simples usando los sensores de movimiento de la placa, simulando maniobras de nave en gravedad cero, antes de que el proyecto se abriera al público general como iniciativa educativa."
+    ],
+    explain:"Falso de principio a fin. El micro:bit fue creado por la BBC (British Broadcasting Corporation) en Reino Unido, en alianza con empresas como Microsoft y ARM, y se lanzó en 2016 regalando un dispositivo a casi 1 millón de estudiantes de 7° grado en ese país — esa parte sí sería un dato real digno de mencionar, pero la NASA nunca estuvo involucrada. El truco: inventar un \"expediente filtrado\" con año concreto para sonar como información privilegiada y difícil de verificar."
+  },
+  {
+    verdict:true,
+    title:"La miel de 3,000 años que todavía se puede comer",
+    paragraphs:[
+      "Un dato que sí parece de científico loco, pero es completamente real: arqueólogos han encontrado vasijas de miel dentro de tumbas egipcias con más de 3,000 años de antigüedad, y esa miel seguía siendo comestible.",
+      "La miel prácticamente nunca se daña porque combina muy poca agua, un nivel de acidez alto y una sustancia natural (peróxido de hidrógeno producido por una enzima de las abejas) que impide que crezcan bacterias u hongos en su interior. Mientras el envase se mantenga bien sellado, la miel puede durar literalmente miles de años sin descomponerse."
+    ],
+    explain:"Verdadero y bien documentado por arqueólogos. Es un ejemplo perfecto de que la realidad a veces suena más a mentira que muchas mentiras bien construidas — por eso no basta con preguntarse \"¿esto suena creíble?\", hay que preguntar \"¿esto se puede verificar?\"."
+  },
+  {
+    verdict:true,
+    title:"Por qué pesas (un poquito) menos cerca del Ecuador",
+    paragraphs:[
+      "Este dato conecta directamente con dónde viven ustedes: si pudieras pesarte con una báscula súper precisa en el Polo Norte y luego en una ciudad cercana a la línea del Ecuador —como Villavicencio—, pesarías ligeramente menos en la segunda.",
+      "Esto pasa por dos razones combinadas: la Tierra no es una esfera perfecta, es un poco más ancha en el Ecuador que en los polos (achatada en los polos), así que en el Ecuador estás un poco más lejos del centro de la Tierra, donde la gravedad es levemente más débil. Además, la rotación de la Tierra genera una fuerza centrífuga que también «resta» un poquito de peso en las zonas ecuatoriales. La diferencia es pequeñísima (menos del 0.5%), pero es real y medible con instrumentos de precisión."
+    ],
+    explain:"Cierto, y es física real de nivel universitario que suena a invento porque nadie lo siente en su vida diaria — la diferencia es demasiado pequeña para notarla en una báscula de baño normal, pero los científicos e ingenieros aeroespaciales sí la tienen en cuenta para cálculos de precisión, como el lanzamiento de cohetes."
+  }
+];
+
+const casesEl = document.getElementById('cases');
+const scorebarEl = document.getElementById('scorebar');
+let resolved = 0;
+let correct = 0;
+
+function updateScore(){
+  scorebarEl.textContent = `ACIERTOS: ${correct} / ${resolved} casos resueltos`;
+}
+
+CASES.forEach((c, i) => {
+  const num = String(i+1).padStart(2,'0');
+  const card = document.createElement('div');
+  card.className = 'case';
+
+  card.innerHTML = `
+    <div class="pin"></div>
+    <div class="case-head">
+      <div>
+        <div class="case-num">EXPEDIENTE N.° <b>${num}</b></div>
+        <h2>${c.title}</h2>
+      </div>
+      <div class="classified">NIVEL: CONVINCENTE</div>
+    </div>
+    ${c.paragraphs.map(p => `<p>${p}</p>`).join('')}
+    <div class="controls">
+      <div class="vote-label">TU VEREDICTO:</div>
+      <button class="vote" data-val="true">✅ ES VERDAD</button>
+      <button class="vote" data-val="false">❌ ES MENTIRA</button>
+      <button class="reveal" disabled>REVELAR VEREDICTO</button>
+    </div>
+    <div class="verdict-area">
+      <div class="stamp-holder"></div>
+      <div class="feedback"></div>
+      <div class="explain"><b>Cómo te engañó (o no) la IA</b>${c.explain}</div>
+    </div>
+  `;
+
+  let vote = null;
+  const btnTrue = card.querySelector('[data-val="true"]');
+  const btnFalse = card.querySelector('[data-val="false"]');
+  const btnReveal = card.querySelector('.reveal');
+  const verdictArea = card.querySelector('.verdict-area');
+  const stampHolder = card.querySelector('.stamp-holder');
+  const feedback = card.querySelector('.feedback');
+
+  function selectVote(val, btn, otherBtn){
+    if(btnReveal.disabled === false && verdictArea.classList.contains('show')) return;
+    vote = val;
+    btn.classList.add(val ? 'selected-true' : 'selected-false');
+    otherBtn.classList.remove(val ? 'selected-false' : 'selected-true');
+    btnReveal.disabled = false;
+  }
+
+  btnTrue.addEventListener('click', () => selectVote(true, btnTrue, btnFalse));
+  btnFalse.addEventListener('click', () => selectVote(false, btnFalse, btnTrue));
+
+  btnReveal.addEventListener('click', () => {
+    if(verdictArea.classList.contains('show')) return;
+    btnTrue.disabled = true;
+    btnFalse.disabled = true;
+    btnReveal.disabled = true;
+
+    const stampClass = c.verdict ? 'verdad' : 'mentira';
+    const stampText = c.verdict ? 'VERDAD CONFIRMADA' : 'MENTIRA DETECTADA';
+    stampHolder.innerHTML = `<span class="stamp ${stampClass}">${stampText}</span>`;
+
+    const hit = (vote === c.verdict);
+    resolved++;
+    if(hit) correct++;
+    feedback.textContent = hit ? '✔ Acertaste: no te dejaste convencer sin pruebas.' : '✘ Te convenció el tono seguro — justo el efecto que queríamos mostrar.';
+    feedback.className = 'feedback ' + (hit ? 'ok' : 'no');
+
+    verdictArea.classList.add('show');
+    updateScore();
+  });
+
+  casesEl.appendChild(card);
+});
+</script>
+</body>
+</html>

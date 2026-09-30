@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-label="Helado de chocolate">
+  <rect width="240" height="300" rx="24" fill="#f5ebe0"/>
+  <path d="M72 150 L120 285 L168 150 Z" fill="#e0a458"/>
+  <path d="M80 165 L150 165 M86 185 L144 185 M93 205 L137 205 M100 225 L130 225 M92 150 L128 250 M112 150 L140 220 M148 150 L112 250 M128 150 L100 220" stroke="#b9772f" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="120" cy="118" r="62" fill="#7b4a2d"/>
+  <path d="M60 140 Q70 175 82 150 Q92 178 104 152 Q116 182 128 152 Q140 176 152 150 Q164 172 180 140 Z" fill="#7b4a2d"/>
+  <circle cx="98" cy="96" r="14" fill="#ffffff" opacity=".35"/>
+  <rect x="130" y="100" width="12" height="6" rx="3" fill="#3b2012"/><rect x="104" y="128" width="12" height="6" rx="3" fill="#3b2012"/><rect x="146" y="130" width="12" height="6" rx="3" fill="#3b2012"/>
+</svg>

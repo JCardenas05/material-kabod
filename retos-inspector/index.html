@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heladería Polo Norte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ===================== ESTILOS DE LA HELADERÍA ===================== -->
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Nunito", Arial, sans-serif;
+      background-color: #fdf6ec;
+      color: #3a2e39;
+    }
+    .tienda { margin-right: 380px; }
+
+    .anuncio-falso {
+      background-color: #ffe600;
+      color: #d00000;
+      font-weight: 800;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 18px;
+      border-bottom: 4px dashed #d00000;
+    }
+
+    .encabezado {
+      background-color: #bde0fe;
+      padding: 28px 24px 22px;
+      text-align: center;
+    }
+    .titulo-principal {
+      font-family: "Baloo 2", "Nunito", sans-serif;
+      font-size: 52px;
+      margin: 0;
+      color: #2b59c3;
+    }
+    .lema { margin: 4px 0 16px; font-size: 18px; }
+    .menu a {
+      display: inline-block;
+      margin: 4px 6px;
+      padding: 8px 16px;
+      background-color: #ffffff;
+      color: #2b59c3;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .oferta {
+      background-color: #ff4d6d;
+      color: #ffffff;
+      text-align: center;
+      padding: 14px 16px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .seccion { max-width: 860px; margin: 0 auto; padding: 28px 24px; }
+    .seccion h2 {
+      font-family: "Baloo 2", "Nunito", sans-serif;
+      font-size: 32px;
+      color: #7209b7;
+      margin: 0 0 12px;
+    }
+    .bienvenida { font-size: 18px; line-height: 1.6; text-align: left; }
+
+    .helado-del-mes {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .foto-helado { width: 200px; height: 250px; border-radius: 20px; }
+
+    .lista-sabores { font-size: 20px; line-height: 1.8; }
+
+    .precios { display: flex; gap: 16px; flex-wrap: wrap; }
+    .tarjeta-precio {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 16px 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      min-width: 180px;
+    }
+    .tarjeta-precio p { margin: 0 0 4px; }
+    .precio { font-size: 28px; font-weight: 800; color: #2a9d8f; }
+
+    .horario { font-size: 18px; }
+    .contador { font-size: 18px; }
+    .contador span { font-weight: 800; color: #7209b7; }
+
+    .boton-comprar {
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: 800;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 12px;
+      background-color: #2a9d8f;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .boton-comprar:disabled { background-color: #b8b8b8; cursor: not-allowed; }
+    .mensaje-pedido { font-weight: 800; color: #2a9d8f; font-size: 20px; }
+
+    .pie {
+      background-color: #3a2e39;
+      color: #fdf6ec;
+      text-align: center;
+      padding: 22px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .tienda { margin-right: 0; }
+      .titulo-principal { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================= -->
+<!-- AQUÍ EMPIEZA LA PÁGINA DE LA HELADERÍA. ESTA ES LA QUE CAMBIAS -->
+<!-- ============================================================= -->
+<main class="tienda" id="tienda">
+
+  <div class="anuncio-falso" id="t-anuncio">
+    🎉 ¡¡FELICIDADES!! Eres el visitante 1.000.000. ¡¡Haz clic y reclama tu celular GRATIS!! 🎉
+  </div>
+
+  <header class="encabezado">
+    <h1 class="titulo-principal" id="t-titulo">Heladería Polo Norte</h1>
+    <p class="lema">Helados tan fríos como un iglú 🐧</p>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#contacto" id="t-link-sabores">Ver sabores</a>
+      <a href="#precios">Precios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="oferta" id="t-oferta">🍦 Oferta de la semana: ¡dos conos por el precio de uno! 🍦</div>
+
+  <section class="seccion" id="inicio">
+    <h2>Bienvenidos</h2>
+    <p class="bienvenida" id="t-bienvenida">
+      Somos una heladería familiar. Preparamos cada helado todas las mañanas con fruta fresca,
+      leche de la región y mucho cariño. Pasa, escoge tu sabor y siéntate a disfrutarlo con nosotros.
+    </p>
+
+    <div class="helado-del-mes">
+      <img class="foto-helado" id="t-img-mes" src="img/fresa.svg" alt="Helado de fresa en cono">
+      <div>
+        <h3>El helado del mes</h3>
+        <p>Cada mes escogemos un sabor especial. Pregunta por él en la caja.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="sabores">
+    <h2 id="t-sabores-titulo">Nuestros sabores</h2>
+    <ul class="lista-sabores" id="t-lista-sabores">
+      <li>Fresa</li>
+      <li>Chocolate</li>
+      <li>Vainilla</li>
+      <li>Menta con chips</li>
+      <li>Brócoli con queso</li>
+      <li id="t-sabor-secreto" hidden>⭐ Sabor secreto: chicle azul</li>
+    </ul>
+    <!-- Palabra secreta para el reto del detective: GLACIAR -->
+  </section>
+
+  <section class="seccion" id="precios">
+    <h2>Precios</h2>
+    <div class="precios">
+      <div class="tarjeta-precio">
+        <p>Cono sencillo</p>
+        <span class="precio" id="t-precio-cono">$4.500</span>
+      </div>
+      <div class="tarjeta-precio">
+        <p>Cono doble</p>
+        <span class="precio">$7.000</span>
+      </div>
+      <div class="tarjeta-precio">
+        <p>Malteada</p>
+        <span class="precio">$9.500</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="visitanos">
+    <h2>Visítanos</h2>
+    <p class="horario" id="t-horario">Abrimos todos los días de 9:00 a. m. a 6:00 p. m.</p>
+    <p class="contador">Clientes felices este mes: <span id="t-contador">1250</span></p>
+    <p>
+      <button class="boton-comprar" id="t-btn-comprar" disabled>Pedir un helado</button>
+    </p>
+    <p class="mensaje-pedido" id="t-mensaje-pedido"></p>
+  </section>
+
+  <footer class="pie" id="contacto">
+    <p>Heladería Polo Norte · Calle del Frío 123 · Teléfono 300 000 0000</p>
+    <p>Página de práctica del Liceo Kabod. Esta heladería no existe.</p>
+  </footer>
+
+</main>
+<!-- ============================================================= -->
+<!-- AQUÍ TERMINA LA PÁGINA DE LA HELADERÍA                        -->
+<!-- ============================================================= -->
+
+
+<!-- ============================================================= -->
+<!-- PANEL DE RETOS: esta parte NO se modifica                     -->
+<!-- ============================================================= -->
+<style>
+  #panel {
+    --p-bg: #141a33;
+    --p-card: #1f2748;
+    --p-card-ok: #103b33;
+    --p-line: #2e3866;
+    --p-text: #e8ecff;
+    --p-muted: #a3acd6;
+    --p-accent: #4cc9f0;
+    --p-ok: #3ddc97;
+    --p-warn: #ffd166;
+    position: fixed;
+    top: 0; right: 0;
+    width: 380px;
+    height: 100vh;
+    background: var(--p-bg);
+    color: var(--p-text);
+    font-family: "Nunito", Arial, sans-serif;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-shadow: -6px 0 24px rgba(0,0,0,.25);
+  }
+  #panel * { box-sizing: border-box; }
+  #panel .p-top { padding: 16px 18px 12px; border-bottom: 1px solid var(--p-line); }
+  #panel .p-top h2 { font-family: "Baloo 2", "Nunito", sans-serif; margin: 0; font-size: 24px; line-height: 1.1; }
+  #panel .p-sub { color: var(--p-muted); margin: 2px 0 10px; font-size: 13px; }
+  #panel .p-barra { height: 10px; background: var(--p-line); border-radius: 99px; overflow: hidden; }
+  #panel .p-barra div { height: 100%; width: 0; background: linear-gradient(90deg, var(--p-accent), var(--p-ok)); transition: width .4s; }
+  #panel .p-conteo { display: flex; justify-content: space-between; margin-top: 6px; font-size: 13px; color: var(--p-muted); }
+  #panel .p-conteo b { color: var(--p-text); }
+  #panel .p-scroll { overflow-y: auto; padding: 12px 14px 40px; flex: 1; }
+  #panel details.p-guia { background: var(--p-card); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; }
+  #panel details.p-guia summary { cursor: pointer; font-weight: 800; color: var(--p-warn); }
+  #panel details.p-guia ol, #panel details.p-guia ul { padding-left: 20px; margin: 8px 0; }
+  #panel details.p-guia li { margin-bottom: 6px; }
+  #panel kbd { background: #0b1024; border: 1px solid var(--p-line); border-bottom-width: 3px; border-radius: 6px; padding: 1px 6px; font-family: inherit; font-size: 13px; }
+  #panel code { background: #0b1024; color: #ffafcc; padding: 1px 5px; border-radius: 5px; font-size: 13px; }
+  #panel .p-nombres { display: grid; gap: 6px; margin-bottom: 14px; }
+  #panel label { font-size: 13px; color: var(--p-muted); font-weight: 700; }
+  #panel input[type=text] {
+    width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--p-line);
+    background: #0b1024; color: var(--p-text); font-family: inherit; font-size: 15px;
+  }
+  #panel .p-nivel { margin: 18px 0 8px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  #panel .p-nivel h3 { margin: 0; font-size: 17px; font-family: "Baloo 2", "Nunito", sans-serif; color: var(--p-accent); }
+  #panel .p-nivel span { font-size: 12px; color: var(--p-muted); }
+  #panel .p-nivel-desc { color: var(--p-muted); font-size: 13px; margin: -4px 0 8px; }
+  #panel .reto { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; transition: background .3s, border-color .3s; }
+  #panel .reto.ok { background: var(--p-card-ok); border-color: var(--p-ok); }
+  #panel .reto-cab { display: flex; gap: 10px; align-items: flex-start; }
+  #panel .reto-num {
+    flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--p-line); font-weight: 800; font-size: 13px;
+  }
+  #panel .reto.ok .reto-num { background: var(--p-ok); color: #0b1024; }
+  #panel .reto-tit { font-weight: 800; margin: 3px 0 4px; }
+  #panel .reto-mision { margin: 0; line-height: 1.45; }
+  #panel .reto-mision b { color: var(--p-warn); }
+  #panel .reto-pista { margin-top: 8px; }
+  #panel .reto-pista summary { cursor: pointer; color: var(--p-accent); font-size: 13px; font-weight: 700; }
+  #panel .reto-pista ol { margin: 6px 0 0; padding-left: 20px; font-size: 13px; color: var(--p-muted); }
+  #panel .reto-pista li { margin-bottom: 4px; }
+  #panel .reto-aprendiste { display: none; margin-top: 8px; padding: 8px 10px; background: rgba(61,220,151,.12); border-radius: 8px; font-size: 13px; line-height: 1.45; }
+  #panel .reto.ok .reto-aprendiste { display: block; }
+  #panel .reto-aprendiste::before { content: "💡 Lo que aprendiste: "; font-weight: 800; color: var(--p-ok); }
+  #panel .reto-respuesta { display: flex; gap: 6px; margin-top: 8px; }
+  #panel .reto-respuesta button, #panel .p-btn {
+    border: none; border-radius: 8px; padding: 8px 12px; font-family: inherit; font-weight: 800; cursor: pointer;
+    background: var(--p-accent); color: #0b1024;
+  }
+  #panel .p-error { color: #ff8fa3; font-size: 13px; margin-top: 4px; }
+  #panel .p-final { display: none; margin-top: 18px; background: linear-gradient(135deg, #3a0ca3, #0f766e); border-radius: 14px; padding: 16px; }
+  #panel .p-final.visible { display: block; }
+  #panel .p-final h3 { margin: 0 0 6px; font-family: "Baloo 2", "Nunito", sans-serif; font-size: 22px; }
+  #panel .p-final p { margin: 6px 0; line-height: 1.45; }
+  #panel .p-reiniciar { margin-top: 24px; background: transparent; color: var(--p-muted); border: 1px solid var(--p-line); }
+
+  #panel-toggle {
+    display: none; position: fixed; right: 14px; bottom: 14px; z-index: 1001;
+    border: none; border-radius: 999px; padding: 12px 18px; font-family: "Nunito", Arial, sans-serif;
+    font-weight: 800; font-size: 15px; background: #141a33; color: #e8ecff; cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,.3);
+  }
+  #p-toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); opacity: 0; pointer-events: none;
+    background: #3ddc97; color: #0b1024; font-family: "Nunito", Arial, sans-serif; font-weight: 800;
+    padding: 12px 20px; border-radius: 12px; z-index: 1002; transition: transform .35s, opacity .35s; box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    max-width: calc(100vw - 32px); text-align: center;
+  }
+  #p-toast.visible { transform: translate(-50%, 0); opacity: 1; }
+
+  @media (max-width: 900px) {
+    #panel { width: min(380px, 100vw); transform: translateX(100%); transition: transform .3s; }
+    #panel.abierto { transform: translateX(0); }
+    #panel-toggle { display: block; }
+  }
+</style>
+
+<aside id="panel" aria-label="Panel de retos">
+  <div class="p-top">
+    <h2>🕵️ Retos del Inspector</h2>
+    <p class="p-sub">Cambia la página de la heladería sin escribir un archivo de código</p>
+    <div class="p-barra"><div id="p-barra"></div></div>
+    <div class="p-conteo"><span>Progreso</span><span><b id="p-hechos">0</b> de <b id="p-total">0</b> retos</span></div>
+  </div>
+
+  <div class="p-scroll">
+    <details class="p-guia" open>
+      <summary>Antes de empezar: cómo abrir el inspector</summary>
+      <ol>
+        <li>Haz <b>clic derecho</b> sobre la parte de la página que quieres cambiar y elige <b>Inspeccionar</b>.</li>
+        <li>También sirve <kbd>F12</kbd> o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>.</li>
+        <li>Se abre una ventana con dos zonas:
+          <ul>
+            <li><b>Elementos</b>: el HTML, lo que <i>es</i> cada cosa (título, párrafo, imagen…).</li>
+            <li><b>Estilos</b>: el CSS, cómo <i>se ve</i> cada cosa (color, tamaño…).</li>
+          </ul>
+        </li>
+        <li>Para cambiar un texto: <b>doble clic</b> sobre él en Elementos, escribe y presiona <kbd>Enter</kbd>.</li>
+        <li>Este panel revisa solo. Cuando cumplas un reto, se pone verde.</li>
+      </ol>
+      <p>⚠️ Solo cambias la página de la heladería (la de la izquierda). Este panel no se toca.</p>
+    </details>
+
+    <div class="p-nombres">
+      <label for="p-nombres">Nombres de la pareja</label>
+      <input type="text" id="p-nombres" placeholder="Ej.: Sofía y Tomás" autocomplete="off">
+      <label for="p-curso">Curso</label>
+      <input type="text" id="p-curso" placeholder="Ej.: 6A" autocomplete="off">
+    </div>
+
+    <div id="p-retos"></div>
+
+    <div class="p-final" id="p-final">
+      <h3>🏆 ¡Misión cumplida!</h3>
+      <p id="p-final-nombres"></p>
+      <p>Llama al docente para que revise tu página <b>antes</b> de hacer lo siguiente.</p>
+      <p><b>La gran pregunta:</b> después de la revisión, recarga la página con <kbd>F5</kbd>. Escribe en tu cuaderno qué pasó con todos tus cambios y por qué crees que pasó.</p>
+      <details class="reto-pista">
+        <summary>Ver la respuesta (solo después de escribirla)</summary>
+        <p>Todos tus cambios desaparecieron. La página vive en un computador lejano (el servidor). El navegador descarga una <b>copia</b> y el inspector cambia solo esa copia, en tu pantalla. Al recargar, el navegador vuelve a descargar la página original. Por eso nadie más vio tus cambios, y por eso para cambiar una página de verdad hay que editar su código y volver a publicarla.</p>
+      </details>
+    </div>
+
+    <button class="p-btn p-reiniciar" id="p-reiniciar" type="button">Empezar de nuevo</button>
+  </div>
+</aside>
+
+<button id="panel-toggle" type="button">🕵️ Retos</button>
+<div id="p-toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var CLAVE = "retos-inspector-heladeria-v1";
+
+  // ---------- utilidades ----------
+  function $(sel) { return document.querySelector(sel); }
+  function norm(t) {
+    return (t || "")
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .toLowerCase().replace(/\s+/g, " ").trim()
+      .replace(/[.!¡?¿]+$/, "");
+  }
+  function texto(sel) { var el = $(sel); return el ? norm(el.textContent) : null; }
+  function soloDigitos(t) { return (t || "").replace(/\D/g, ""); }
+  function estilo(sel, prop) { var el = $(sel); return el ? getComputedStyle(el)[prop] : null; }
+  function visible(el) {
+    if (!el || !el.isConnected) return false;
+    var cs = getComputedStyle(el);
+    if (cs.display === "none" || cs.visibility === "hidden" || parseFloat(cs.opacity) === 0) return false;
+    return el.getClientRects().length > 0;
+  }
+  function itemsSabores() {
+    var ul = $("#t-lista-sabores");
+    return ul ? Array.prototype.slice.call(ul.querySelectorAll("li")) : [];
+  }
+
+  // ---------- valores originales (para saber si algo cambió) ----------
+  var original = {
+    colorTitulo: estilo("#t-titulo", "color"),
+    tamPrecio: parseFloat(estilo("#t-precio-cono", "fontSize")) || 28
+  };
+
+  var pedidoHecho = false;
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("#t-btn-comprar");
+    if (btn && !btn.disabled) {
+      pedidoHecho = true;
+      var msg = $("#t-mensaje-pedido");
+      if (msg) msg.textContent = "¡Pedido recibido! Tu helado va en camino 🍦";
+    }
+  });
+
+  // ---------- los retos ----------
+  var NIVELES = [
+    { n: 1, titulo: "Nivel 1 · Textos y números", desc: "Cambia lo que dice la página." },
+    { n: 2, titulo: "Nivel 2 · Listas, imágenes y enlaces", desc: "Agrega, quita y arregla elementos." },
+    { n: 3, titulo: "Nivel 3 · Estilo", desc: "Ahora no cambias lo que dice, sino cómo se ve. Trabajas en la zona de Estilos." },
+    { n: 4, titulo: "Nivel 4 · Detective", desc: "Hay cosas en el código que no se ven en la página. Encuéntralas." }
+  ];
+
+  var RETOS = [
+    // ----- Nivel 1 -----
+    {
+      id: "titulo", nivel: 1,
+      titulo: "La heladería se mudó",
+      mision: 'Cambia el título grande <b>Heladería Polo Norte</b> por <b>Heladería Polo Sur</b>.',
+      pista: ["Clic derecho sobre el título grande → Inspeccionar.", "En Elementos queda marcada una línea que empieza con <code>&lt;h1</code>.", "Doble clic sobre el texto Heladería Polo Norte, escribe el nuevo y presiona Enter."],
+      aprendiste: "El título principal de una página va dentro de la etiqueta <code>&lt;h1&gt;</code>. Normalmente hay uno solo por página.",
+      check: function () { return texto("#t-titulo") === "heladeria polo sur"; }
+    },
+    {
+      id: "subtitulo", nivel: 1,
+      titulo: "Un subtítulo más fresco",
+      mision: 'Cambia el subtítulo <b>Nuestros sabores</b> por <b>Sabores del día</b>.',
+      pista: ["Baja hasta la sección de sabores.", "Clic derecho sobre Nuestros sabores → Inspeccionar.", "Fíjate en qué etiqueta es: ¿es igual a la del título grande?"],
+      aprendiste: "Los subtítulos van en <code>&lt;h2&gt;</code>. Hay seis niveles: de <code>&lt;h1&gt;</code> (el más importante) a <code>&lt;h6&gt;</code>.",
+      check: function () { return texto("#t-sabores-titulo") === "sabores del dia"; }
+    },
+    {
+      id: "horario", nivel: 1,
+      titulo: "Cerramos más tarde",
+      mision: 'En la sección Visítanos, la heladería ahora cierra a las <b>8:00 p. m.</b> Cambia solo la hora de cierre.',
+      pista: ["Clic derecho sobre el horario → Inspeccionar.", "Es un párrafo: <code>&lt;p&gt;</code>.", "Doble clic en el texto y cambia solo el 6 por un 8."],
+      aprendiste: "Los párrafos van en <code>&lt;p&gt;</code>. Puedes cambiar solo una parte del texto sin tocar lo demás.",
+      check: function () { var t = texto("#t-horario") || ""; return t.indexOf("8:00") !== -1 && t.indexOf("6:00") === -1 && t.indexOf("9:00") !== -1; }
+    },
+    {
+      id: "precio", nivel: 1,
+      titulo: "Precio de oferta",
+      mision: 'El cono sencillo cuesta <b>$4.500</b>. Bájalo a <b>$3.000</b>.',
+      pista: ["Clic derecho sobre $4.500 → Inspeccionar.", "El precio está dentro de una etiqueta <code>&lt;span&gt;</code>.", "Doble clic sobre el número y cámbialo."],
+      aprendiste: "Un <code>&lt;span&gt;</code> encierra un pedacito de texto para poder darle un estilo propio (aquí, el precio grande y verde).",
+      check: function () { return soloDigitos($("#t-precio-cono") && $("#t-precio-cono").textContent) === "3000"; }
+    },
+    {
+      id: "contador", nivel: 1,
+      titulo: "Clientes de mi salón",
+      mision: 'Cambia el número de <b>clientes felices</b> (1250) por el número de estudiantes que hay en tu salón.',
+      pista: ["Clic derecho sobre el número 1250 → Inspeccionar.", "Escribe solo el número, sin letras ni puntos."],
+      aprendiste: "Para el navegador, un número en la página es solo texto. Lo que ves es lo que está escrito en el código.",
+      check: function () { var t = texto("#t-contador"); if (!t || !/^\d+$/.test(t)) return false; var n = parseInt(t, 10); return n >= 5 && n <= 60; }
+    },
+
+    // ----- Nivel 2 -----
+    {
+      id: "agregar", nivel: 2,
+      titulo: "Sabor nuevo",
+      mision: 'Agrega a la lista de sabores uno nuevo: <b>Mango biche</b>.',
+      pista: ["Clic derecho sobre un sabor de la lista (por ejemplo Fresa) → Inspeccionar.", "En Elementos, clic derecho sobre la línea <code>&lt;li&gt;Fresa&lt;/li&gt;</code> → <b>Duplicar elemento</b>.", "Aparece una copia. Doble clic en el texto de la copia y escribe Mango biche."],
+      aprendiste: "Una lista con viñetas es un <code>&lt;ul&gt;</code> y cada renglón es un <code>&lt;li&gt;</code>. Para agregar un renglón, agregas otro <code>&lt;li&gt;</code>.",
+      check: function () { return itemsSabores().some(function (li) { return norm(li.textContent) === "mango biche" && visible(li); }); }
+    },
+    {
+      id: "intruso", nivel: 2,
+      titulo: "Sabor intruso",
+      mision: 'Nadie pide <b>Brócoli con queso</b>. Elimínalo de la lista.',
+      pista: ["Clic derecho sobre Brócoli con queso → Inspeccionar.", "Con la línea <code>&lt;li&gt;</code> marcada, presiona la tecla <kbd>Supr</kbd> (o clic derecho → Eliminar elemento)."],
+      aprendiste: "Si borras una etiqueta, desaparece de la página todo lo que tenía adentro.",
+      check: function () { return !itemsSabores().some(function (li) { return norm(li.textContent).indexOf("brocoli") !== -1 && visible(li); }); }
+    },
+    {
+      id: "imagen", nivel: 2,
+      titulo: "Cambio de helado del mes",
+      mision: 'El helado del mes ya no es de fresa. Cambia la imagen por la de chocolate. En la carpeta de imágenes hay: <code>fresa.svg</code>, <code>chocolate.svg</code>, <code>menta.svg</code>, <code>vainilla.svg</code> y <code>mango.svg</code>.',
+      pista: ["Clic derecho sobre la imagen del helado → Inspeccionar.", "Busca la parte que dice <code>src=\"img/fresa.svg\"</code>.", "Doble clic sobre <code>img/fresa.svg</code> y cambia solo la palabra fresa por chocolate."],
+      aprendiste: "Las imágenes usan la etiqueta <code>&lt;img&gt;</code>, y su atributo <code>src</code> dice dónde está el archivo de la imagen. La imagen no está dentro del HTML: el HTML solo dice dónde buscarla.",
+      check: function () { var im = $("#t-img-mes"); return !!im && /(^|\/)chocolate\.svg$/i.test(im.getAttribute("src") || "") && im.complete && im.naturalWidth > 0; }
+    },
+    {
+      id: "alt", nivel: 2,
+      titulo: "Descripción para quien no ve",
+      mision: 'La imagen tiene un texto escondido que describe lo que muestra. Todavía dice fresa. Cámbialo por <b>Helado de chocolate en cono</b>.',
+      pista: ["En la misma etiqueta <code>&lt;img&gt;</code> del reto anterior busca <code>alt=\"...\"</code>.", "Doble clic sobre el texto del <code>alt</code> y cámbialo."],
+      aprendiste: "El atributo <code>alt</code> describe la imagen. Lo leen en voz alta los lectores de pantalla que usan las personas ciegas, y aparece si la imagen no carga.",
+      check: function () { var im = $("#t-img-mes"); return !!im && norm(im.getAttribute("alt")) === "helado de chocolate en cono"; }
+    },
+    {
+      id: "enlace", nivel: 2,
+      titulo: "Enlace perdido",
+      mision: 'En el menú de arriba, el botón <b>Ver sabores</b> te lleva al final de la página. Arréglalo para que lleve a la sección de sabores (su nombre, o <code>id</code>, es <b>sabores</b>). Después haz clic en él para probarlo.',
+      pista: ["Clic derecho sobre Ver sabores → Inspeccionar. Es una etiqueta <code>&lt;a&gt;</code>.", "Mira su atributo <code>href</code>: dice <code>#contacto</code>.", "Cámbialo por <code>#sabores</code> y prueba el enlace."],
+      aprendiste: "Los enlaces usan la etiqueta <code>&lt;a&gt;</code>, y su atributo <code>href</code> dice a dónde llevan. Con <code>#</code> llevan a una parte de la misma página que tenga ese <code>id</code>.",
+      check: function () { var a = $("#t-link-sabores"); return !!a && (a.getAttribute("href") || "").trim() === "#sabores"; }
+    },
+    {
+      id: "pestana", nivel: 2,
+      titulo: "El nombre de la pestaña",
+      mision: 'Mira la pestaña del navegador (arriba): dice Heladería Polo Norte. Cámbiala por <b>Mi heladería favorita</b>. Ojo: ese texto <i>no</i> está en la parte visible de la página.',
+      pista: ["Abre el inspector y sube hasta el principio de Elementos.", "Abre la flechita de <code>&lt;head&gt;</code>: ahí está lo que no se ve en la página.", "Busca la etiqueta <code>&lt;title&gt;</code> y cambia su texto."],
+      aprendiste: "La página tiene dos partes: <code>&lt;head&gt;</code> (información para el navegador, como el <code>&lt;title&gt;</code> de la pestaña) y <code>&lt;body&gt;</code> (todo lo que ves).",
+      check: function () { return norm(document.title) === "mi heladeria favorita"; }
+    },
+
+    // ----- Nivel 3 -----
+    {
+      id: "color", nivel: 3,
+      titulo: "Título de otro color",
+      mision: 'Cambia el <b>color</b> del título grande por uno que te guste.',
+      pista: ["Inspecciona el título grande.", "Mira la zona de <b>Estilos</b>: busca la regla <code>.titulo-principal</code> y la línea <code>color: #2b59c3;</code>.", "Haz clic sobre el cuadrito de color para escoger otro, o escribe un nombre en inglés como <code>red</code> o <code>orange</code>."],
+      aprendiste: "El HTML dice <i>qué es</i> cada cosa; el CSS dice <i>cómo se ve</i>. La propiedad <code>color</code> cambia el color de las letras.",
+      check: function () { var c = estilo("#t-titulo", "color"); return !!c && c !== original.colorTitulo; }
+    },
+    {
+      id: "oferta", nivel: 3,
+      titulo: "Fondo dorado",
+      mision: 'Cambia el color de fondo de la franja de la <b>Oferta de la semana</b> a <b>gold</b> (dorado).',
+      pista: ["Inspecciona la franja rosada de la oferta.", "En Estilos busca <code>.oferta</code> y la línea <code>background-color</code>.", "Borra el valor y escribe <code>gold</code>."],
+      aprendiste: "<code>background-color</code> cambia el color de fondo. Los colores se pueden escribir con su nombre en inglés (<code>gold</code>) o con un código como <code>#ffd700</code>.",
+      check: function () { return estilo("#t-oferta", "backgroundColor") === "rgb(255, 215, 0)"; }
+    },
+    {
+      id: "tamano", nivel: 3,
+      titulo: "Precio que se vea",
+      mision: 'Haz que el precio del <b>cono sencillo</b> se vea mucho más grande: por lo menos <b>50px</b>. Solo ese precio, no los otros dos.',
+      pista: ["Inspecciona el precio del cono sencillo.", "Si cambias la regla <code>.precio</code>, crecen los tres precios. Para cambiar solo uno, usa la primera caja de Estilos, la que dice <code>element.style { }</code>.", "Haz clic dentro de las llaves y escribe <code>font-size: 50px</code>."],
+      aprendiste: "<code>font-size</code> cambia el tamaño de la letra. Una regla con nombre de clase (<code>.precio</code>) afecta a todos los que tienen esa clase; <code>element.style</code> afecta solo a uno.",
+      check: function () {
+        var el = $("#t-precio-cono"); if (!el) return false;
+        var grande = parseFloat(getComputedStyle(el).fontSize) >= 50;
+        var otros = Array.prototype.slice.call(document.querySelectorAll("#tienda .precio")).filter(function (p) { return p !== el; });
+        var otrosIgual = otros.every(function (p) { return parseFloat(getComputedStyle(p).fontSize) < 50; });
+        return grande && otrosIgual;
+      }
+    },
+    {
+      id: "centrar", nivel: 3,
+      titulo: "Bienvenida centrada",
+      mision: 'Centra el párrafo de bienvenida que empieza con "Somos una heladería familiar".',
+      pista: ["Inspecciona el párrafo.", "En Estilos busca <code>.bienvenida</code> y la línea <code>text-align: left;</code>.", "Cambia <code>left</code> por <code>center</code>."],
+      aprendiste: "<code>text-align</code> alinea el texto: <code>left</code> (izquierda), <code>center</code> (centro), <code>right</code> (derecha).",
+      check: function () { return estilo("#t-bienvenida", "textAlign") === "center"; }
+    },
+    {
+      id: "borde", nivel: 3,
+      titulo: "Marco para la foto",
+      mision: 'Ponle un <b>borde</b> (marco) a la imagen del helado del mes.',
+      pista: ["Inspecciona la imagen del helado.", "En Estilos, en la regla <code>.foto-helado</code>, haz clic al final de la última línea para agregar una nueva.", "Escribe <code>border: 6px solid purple</code> (grosor, tipo de línea, color)."],
+      aprendiste: "<code>border</code> dibuja un marco. Lleva tres datos: el grosor (<code>6px</code>), el tipo de línea (<code>solid</code>, <code>dashed</code>, <code>dotted</code>) y el color.",
+      check: function () { var el = $("#t-img-mes"); if (!el) return false; var cs = getComputedStyle(el); return cs.borderTopStyle !== "none" && parseFloat(cs.borderTopWidth) > 0; }
+    },
+    {
+      id: "anuncio", nivel: 3,
+      titulo: "Fuera el anuncio tramposo",
+      mision: 'La franja amarilla que dice que ganaste un celular es una trampa. Desaparécela <b>sin borrarla</b>: escóndela con estilo.',
+      pista: ["Inspecciona la franja amarilla.", "En Estilos, en la regla <code>.anuncio-falso</code>, agrega una línea nueva.", "Escribe <code>display: none</code>."],
+      aprendiste: "<code>display: none</code> esconde un elemento: sigue en el HTML pero no se muestra. Y en internet real, un aviso de \"¡ganaste un premio!\" casi siempre es una trampa: no se le hace clic.",
+      check: function () { var el = $("#t-anuncio"); return !!el && el.isConnected && !visible(el); }
+    },
+
+    // ----- Nivel 4 -----
+    {
+      id: "secreto", nivel: 4,
+      titulo: "La palabra secreta",
+      mision: 'En el código de la sección de sabores hay un <b>comentario</b>: un mensaje que el navegador no muestra. Encuentra la palabra secreta y escríbela aquí.',
+      pista: ["Inspecciona la lista de sabores.", "Busca debajo del <code>&lt;/ul&gt;</code> una línea verde que empieza con <code>&lt;!--</code>.", "Los comentarios son notas que deja quien escribe el código."],
+      aprendiste: "Todo lo que va entre <code>&lt;!--</code> y <code>--&gt;</code> es un comentario: el navegador lo ignora. Sirve para dejar notas en el código.",
+      respuesta: "glaciar",
+      check: function () { return false; }
+    },
+    {
+      id: "escondido", nivel: 4,
+      titulo: "El sabor escondido",
+      mision: 'La lista de sabores tiene un renglón que existe en el código pero no aparece en la página. Hazlo <b>aparecer</b>.',
+      pista: ["Inspecciona la lista de sabores y abre la flechita del <code>&lt;ul&gt;</code>.", "Hay un <code>&lt;li&gt;</code> con la palabra <code>hidden</code> (escondido).", "Doble clic sobre <code>hidden</code> y bórralo; o clic derecho → Editar atributo."],
+      aprendiste: "El atributo <code>hidden</code> esconde un elemento. Lo que ves en la página no siempre es todo lo que hay en el código.",
+      check: function () { return visible($("#t-sabor-secreto")); }
+    },
+    {
+      id: "boton", nivel: 4,
+      titulo: "Botón bloqueado",
+      mision: 'El botón <b>Pedir un helado</b> está gris y no funciona. Desbloquéalo y haz clic en él hasta que aparezca el mensaje del pedido.',
+      pista: ["Inspecciona el botón. Es una etiqueta <code>&lt;button&gt;</code>.", "Tiene un atributo que lo bloquea: <code>disabled</code> (desactivado).", "Bórralo y haz clic en el botón."],
+      aprendiste: "El atributo <code>disabled</code> desactiva un botón. Las páginas lo usan, por ejemplo, para que no envíes un formulario sin llenarlo.",
+      check: function () { return pedidoHecho; }
+    }
+  ];
+
+  // ---------- estado guardado ----------
+  var estado = { hechos: {}, nombres: "", curso: "" };
+  try {
+    var guardado = JSON.parse(localStorage.getItem(CLAVE) || "null");
+    if (guardado && typeof guardado === "object") {
+      estado.hechos = guardado.hechos || {};
+      estado.nombres = guardado.nombres || "";
+      estado.curso = guardado.curso || "";
+    }
+  } catch (e) { /* sin almacenamiento: el progreso vive solo mientras la página esté abierta */ }
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (e) {} }
+
+  // ---------- pintar retos ----------
+  var cont = $("#p-retos");
+  var numero = 0;
+  NIVELES.forEach(function (niv) {
+    var retosNivel = RETOS.filter(function (r) { return r.nivel === niv.n; });
+    var cab = document.createElement("div");
+    cab.className = "p-nivel";
+    cab.innerHTML = "<h3>" + niv.titulo + "</h3><span id='p-niv-" + niv.n + "'></span>";
+    cont.appendChild(cab);
+    var d = document.createElement("p");
+    d.className = "p-nivel-desc";
+    d.textContent = niv.desc;
+    cont.appendChild(d);
+
+    retosNivel.forEach(function (r) {
+      numero += 1;
+      r.numero = numero;
+      var div = document.createElement("div");
+      div.className = "reto";
+      div.id = "reto-" + r.id;
+      var html =
+        "<div class='reto-cab'><div class='reto-num'>" + numero + "</div><div>" +
+        "<div class='reto-tit'>" + r.titulo + "</div>" +
+        "<p class='reto-mision'>" + r.mision + "</p></div></div>";
+      if (r.respuesta) {
+        html += "<div class='reto-respuesta'><input type='text' placeholder='Palabra secreta' autocomplete='off'>" +
+                "<button type='button'>Revisar</button></div><div class='p-error'></div>";
+      }
+      html += "<details class='reto-pista'><summary>¿Necesitas una pista?</summary><ol>" +
+              r.pista.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ol></details>" +
+              "<div class='reto-aprendiste'>" + r.aprendiste + "</div>";
+      div.innerHTML = html;
+      cont.appendChild(div);
+
+      if (r.respuesta) {
+        var inp = div.querySelector("input");
+        var err = div.querySelector(".p-error");
+        var revisar = function () {
+          if (norm(inp.value) === r.respuesta) { marcar(r); err.textContent = ""; }
+          else { err.textContent = "Esa no es. Sigue buscando en el código."; }
+        };
+        div.querySelector("button").addEventListener("click", revisar);
+        inp.addEventListener("keydown", function (e) { if (e.key === "Enter") revisar(); });
+      }
+    });
+  });
+  $("#p-total").textContent = RETOS.length;
+
+  // ---------- nombres ----------
+  var inNombres = $("#p-nombres"), inCurso = $("#p-curso");
+  inNombres.value = estado.nombres;
+  inCurso.value = estado.curso;
+  inNombres.addEventListener("input", function () { estado.nombres = inNombres.value; guardar(); pintarFinal(); });
+  inCurso.addEventListener("input", function () { estado.curso = inCurso.value; guardar(); pintarFinal(); });
+
+  // ---------- revisar ----------
+  var toastTimer;
+  function toast(msg) {
+    var t = $("#p-toast");
+    t.textContent = msg;
+    t.classList.add("visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("visible"); }, 2600);
+  }
+
+  function marcar(r, silencioso) {
+    if (!estado.hechos[r.id]) {
+      estado.hechos[r.id] = true;
+      guardar();
+      if (!silencioso) toast("✅ ¡Reto " + r.numero + " logrado: " + r.titulo + "!");
+    }
+    var div = document.getElementById("reto-" + r.id);
+    if (div) {
+      div.classList.add("ok");
+      var inp = div.querySelector(".reto-respuesta input");
+      if (inp) { inp.value = r.respuesta.toUpperCase(); inp.disabled = true; }
+    }
+  }
+
+  function pintarFinal() {
+    var hechos = RETOS.filter(function (r) { return estado.hechos[r.id]; }).length;
+    $("#p-hechos").textContent = hechos;
+    $("#p-barra").style.width = (100 * hechos / RETOS.length) + "%";
+    NIVELES.forEach(function (niv) {
+      var del = RETOS.filter(function (r) { return r.nivel === niv.n; });
+      var ok = del.filter(function (r) { return estado.hechos[r.id]; }).length;
+      var s = document.getElementById("p-niv-" + niv.n);
+      if (s) s.textContent = ok + " / " + del.length + (ok === del.length ? " ✅" : "");
+    });
+    var fin = $("#p-final");
+    if (hechos === RETOS.length) {
+      var quien = (estado.nombres || "Pareja sin nombre").trim();
+      $("#p-final-nombres").textContent = quien + (estado.curso ? " · " + estado.curso.trim() : "") + " — " + hechos + " de " + RETOS.length + " retos.";
+      fin.classList.add("visible");
+    } else {
+      fin.classList.remove("visible");
+    }
+  }
+
+  function revisarTodo() {
+    RETOS.forEach(function (r) {
+      if (estado.hechos[r.id]) { marcar(r, true); return; }
+      var ok = false;
+      try { ok = r.check(); } catch (e) { ok = false; }
+      if (ok) marcar(r);
+    });
+    pintarFinal();
+  }
+
+  // ---------- reiniciar ----------
+  $("#p-reiniciar").addEventListener("click", function () {
+    if (!confirm("¿Borrar todo el progreso y empezar de nuevo?")) return;
+    estado.hechos = {};
+    guardar();
+    location.reload();
+  });
+
+  // ---------- panel en pantallas pequeñas ----------
+  $("#panel-toggle").addEventListener("click", function () {
+    var p = $("#panel");
+    p.classList.toggle("abierto");
+    this.textContent = p.classList.contains("abierto") ? "✖ Cerrar" : "🕵️ Retos";
+  });
+
+  revisarTodo();
+  setInterval(revisarTodo, 700);
+})();
+</script>
+
+</body>
+</html>
